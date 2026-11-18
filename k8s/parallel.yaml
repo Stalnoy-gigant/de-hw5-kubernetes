@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pairs-map
+  namespace: de-hw5
+spec:
+  completions: 8
+  parallelism: 4
+  completionMode: Indexed
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      containers:
+        - name: pairs
+          image: de-hw5-pairs:1
+          imagePullPolicy: Never
+          args: ["map", "--parts", "8", "--prefix", "RUN_PREFIX"]
+          envFrom: [{secretRef: {name: rustfs-auth}}]
+          env: [{name: S3_ENDPOINT, value: "http://rustfs:9000"}]
+          resources:
+            requests: {cpu: 250m, memory: 96Mi}
+            limits: {cpu: "1", memory: 192Mi}

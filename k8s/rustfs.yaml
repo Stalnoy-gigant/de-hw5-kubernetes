@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rustfs-disk0
+  namespace: de-hw5
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rustfs-disk1
+  namespace: de-hw5
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rustfs-disk2
+  namespace: de-hw5
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rustfs-disk3
+  namespace: de-hw5
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rustfs
+  namespace: de-hw5
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: rustfs-hw5}
+  template:
+    metadata:
+      labels: {app: rustfs-hw5}
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: rustfs
+          image: rustfs/rustfs:1.0.1
+          imagePullPolicy: IfNotPresent
+          securityContext: {runAsUser: 0}
+          ports: [{name: s3, containerPort: 9000}]
+          env:
+            - {name: RUSTFS_VOLUMES, value: "/data/rustfs{0...3}"}
+            - {name: RUSTFS_ADDRESS, value: "0.0.0.0:9000"}
+            - {name: RUSTFS_CONSOLE_ENABLE, value: "false"}
+            - {name: RUSTFS_UNSAFE_BYPASS_DISK_CHECK, value: "true"}
+            - name: RUSTFS_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: rustfs-auth, key: S3_ACCESS_KEY}}
+            - name: RUSTFS_SECRET_KEY
+              valueFrom: {secretKeyRef: {name: rustfs-auth, key: S3_SECRET_KEY}}
+          readinessProbe:
+            tcpSocket: {port: s3}
+            periodSeconds: 2
+          resources:
+            requests: {cpu: 200m, memory: 128Mi}
+            limits: {cpu: "2", memory: 768Mi}
+          volumeMounts:
+            - {name: disk0, mountPath: /data/rustfs0}
+            - {name: disk1, mountPath: /data/rustfs1}
+            - {name: disk2, mountPath: /data/rustfs2}
+            - {name: disk3, mountPath: /data/rustfs3}
+      volumes:
+        - name: disk0
+          persistentVolumeClaim: {claimName: rustfs-disk0}
+        - name: disk1
+          persistentVolumeClaim: {claimName: rustfs-disk1}
+        - name: disk2
+          persistentVolumeClaim: {claimName: rustfs-disk2}
+        - name: disk3
+          persistentVolumeClaim: {claimName: rustfs-disk3}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustfs
+  namespace: de-hw5
+spec:
+  selector: {app: rustfs-hw5}
+  ports: [{name: s3, port: 9000, targetPort: s3}]

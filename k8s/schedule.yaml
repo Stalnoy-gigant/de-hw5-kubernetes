@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cpu-DEMO_ROLE
+  namespace: de-hw5
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      priorityClassName: de-hw5-DEMO_ROLE
+      terminationGracePeriodSeconds: 1
+      containers:
+        - name: hold
+          image: de-hw5-pairs:1
+          imagePullPolicy: Never
+          command: ["sh", "-c", "date -u; sleep DEMO_SECONDS; date -u"]
+          resources:
+            requests: {cpu: DEMO_CPU, memory: 16Mi}
+            limits: {cpu: DEMO_CPU, memory: 32Mi}

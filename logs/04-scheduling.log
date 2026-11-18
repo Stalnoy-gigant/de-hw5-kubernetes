@@ -1,0 +1,50 @@
+priorityclass.scheduling.k8s.io/de-hw5-low created
+priorityclass.scheduling.k8s.io/de-hw5-high created
+priorityclass.scheduling.k8s.io/de-hw5-wait created
+node=de-hw5-control-plane allocatable=10 allocated_before=1200m low_and_high_request=8700m wait_request=250m expected_remaining=100m
+2026-11-18 14:41:36 +0300
+job.batch/cpu-low created
+pod/cpu-low-wfpcp condition met
+job.batch/cpu-wait created
+pod/cpu-wait-kzmcw condition met
+2026-11-18 14:41:37 +0300
+NAME             READY   STATUS    RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+cpu-low-wfpcp    1/1     Running   0          0s    10.244.0.25   de-hw5-control-plane   <none>           <none>
+cpu-wait-kzmcw   0/1     Pending   0          0s    <none>        <none>                 <none>           <none>
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  0s    default-scheduler  0/1 nodes are available: 1 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+job.batch/cpu-high created
+pod/cpu-high-x7hdp condition met
+2026-11-18 14:41:39 +0300
+NAME             READY   STATUS    RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+cpu-high-x7hdp   1/1     Running   0          2s    10.244.0.26   de-hw5-control-plane   <none>           <none>
+cpu-wait-kzmcw   0/1     Pending   0          2s    <none>        <none>                 <none>           <none>
+LAST SEEN   TYPE     REASON      OBJECT              MESSAGE
+2s          Normal   Scheduled   pod/cpu-low-wfpcp   Successfully assigned de-hw5/cpu-low-wfpcp to de-hw5-control-plane
+2s          Normal   Pulled      pod/cpu-low-wfpcp   Container image "de-hw5-pairs:1" already present on machine and can be accessed by the pod
+2s          Normal   Created     pod/cpu-low-wfpcp   Container created
+2s          Normal   Started     pod/cpu-low-wfpcp   Container started
+2s          Normal   Preempted   pod/cpu-low-wfpcp   Preempted by pod a44fa9eb-bcb7-459a-8618-fd846a591f62 on node de-hw5-control-plane
+2s          Normal   Killing     pod/cpu-low-wfpcp   Stopping container hold
+job.batch "cpu-low" deleted from de-hw5 namespace
+job.batch/cpu-high condition met
+job.batch/cpu-wait condition met
+2026-11-18 14:42:04 +0300
+2026-11-18T11:41:39.666224502Z Wed Nov 18 11:41:39 UTC 2026
+2026-11-18T11:41:57.667185010Z Wed Nov 18 11:41:57 UTC 2026
+2026-11-18T11:41:59.724454344Z Wed Nov 18 11:41:59 UTC 2026
+2026-11-18T11:42:01.729614679Z Wed Nov 18 11:42:01 UTC 2026
+LAST SEEN   TYPE      REASON             OBJECT               MESSAGE
+27s         Warning   FailedScheduling   pod/cpu-high-x7hdp   0/1 nodes are available: 1 Insufficient cpu. preemption: found a potential placement for pod on node de-hw5-control-plane, preempting 1 victims
+25s         Normal    Scheduled          pod/cpu-high-x7hdp   Successfully assigned de-hw5/cpu-high-x7hdp to de-hw5-control-plane
+25s         Normal    Pulled             pod/cpu-high-x7hdp   Container image "de-hw5-pairs:1" already present on machine and can be accessed by the pod
+25s         Normal    Created            pod/cpu-high-x7hdp   Container created
+25s         Normal    Started            pod/cpu-high-x7hdp   Container started
+LAST SEEN   TYPE      REASON             OBJECT               MESSAGE
+25s         Warning   FailedScheduling   pod/cpu-wait-kzmcw   0/1 nodes are available: 1 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+5s          Normal    Scheduled          pod/cpu-wait-kzmcw   Successfully assigned de-hw5/cpu-wait-kzmcw to de-hw5-control-plane
+5s          Normal    Pulled             pod/cpu-wait-kzmcw   Container image "de-hw5-pairs:1" already present on machine and can be accessed by the pod
+5s          Normal    Created            pod/cpu-wait-kzmcw   Container created
+5s          Normal    Started            pod/cpu-wait-kzmcw   Container started

@@ -1,0 +1,22 @@
+namespace/de-hw5-quota created
+resourcequota/cpu-budget created
+resourcequota/cpu-budget condition met
+pod/quota-a created
+Name:         cpu-budget
+Namespace:    de-hw5-quota
+Resource      Used  Hard
+--------      ----  ----
+requests.cpu  300m  500m
+Error from server (Forbidden): error when creating "STDIN": pods "quota-b" is forbidden: exceeded quota: cpu-budget, requested: requests.cpu=300m, used: requests.cpu=300m, limited: requests.cpu=500m
+pod "quota-a" deleted from de-hw5-quota namespace
+resourcequota/cpu-budget condition met
+pod/quota-b created
+pod/quota-b condition met
+NAME      READY   STATUS    RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+quota-b   1/1     Running   0          0s    10.244.0.29   de-hw5-control-plane   <none>           <none>
+Name:         cpu-budget
+Namespace:    de-hw5-quota
+Resource      Used  Hard
+--------      ----  ----
+requests.cpu  300m  500m
+pod "quota-b" deleted from de-hw5-quota namespace

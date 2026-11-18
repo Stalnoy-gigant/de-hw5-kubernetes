@@ -1,0 +1,28 @@
+2026-11-18 14:40:38 +0300
+job.batch/pairs-oom created
+job.batch/pairs-oom condition met
+NAME              READY   STATUS      RESTARTS   AGE   IP           NODE                   NOMINATED NODE   READINESS GATES
+pairs-oom-nl6b4   0/1     OOMKilled   0          3s    10.244.0.7   de-hw5-control-plane   <none>           <none>
+oom_reason=OOMKilled exit_code=137 request=48Mi limit=64Mi
+2026-11-18T11:40:38.789523168Z Читаю файл /input/vacancies.jsonl (100922060 байт) целиком
+hw3_rss_peak_mib=510.7 source=hw3/results/profile_mr_w1.json
+job.batch/pairs-profile created
+job.batch/pairs-profile condition met
+Читаю файл /input/vacancies.jsonl (100922060 байт) целиком
+rows=229388 selected=23627 distinct=48616 elapsed=0.811s
+memory_peak_bytes=262275072
+measured_peak_bytes=262275072 safety_factor=1.25 rounding_mib=32 tuned_limit_mib=320
+job.batch/pairs-tuned created
+job.batch/pairs-tuned condition met
+Читаю файл /input/vacancies.jsonl (100922060 байт) целиком
+rows=229388 selected=23627 distinct=48616 elapsed=0.828s
+memory_peak_bytes=247312384
+NAME            STATUS     COMPLETIONS   DURATION   AGE
+pairs-oom       Failed     0/1           9s         9s
+pairs-profile   Complete   1/1           3s         6s
+pairs-tuned     Complete   1/1           3s         3s
+NAME                  CPU_REQ   MEM_REQ   MEM_LIMIT   STATE
+input-loader          50m       64Mi      256Mi       <none>
+pairs-oom-nl6b4       250m      48Mi      64Mi        OOMKilled
+pairs-profile-tjzl4   250m      256Mi     768Mi       Completed
+pairs-tuned-rrhf9     250m      256Mi     320Mi       Completed

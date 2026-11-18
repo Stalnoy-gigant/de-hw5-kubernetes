@@ -1,0 +1,9 @@
+NAME                   STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+de-hw5-control-plane   Ready    control-plane   3m17s   v1.37.0   172.21.0.2    <none>        Debian GNU/Linux 13 (trixie)   7.0.12-linuxkit (arm64)   containerd://2.3.4
+image=sha256:474fcbda141f748d68f97b196795c09ec23b0b9be098f94ca0982e98aa7b5064 os=linux arch=arm64
+namespace/de-hw5 created
+persistentvolumeclaim/input created
+pod/input-loader created
+pod/input-loader condition met
+fd5225c91c23601d1d66ab6209cab67f5ba02dae38673513499f96a402141220  ../hw3/data/vacancies.jsonl
+fd5225c91c23601d1d66ab6209cab67f5ba02dae38673513499f96a402141220  /input/vacancies.jsonl

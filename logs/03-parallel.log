@@ -1,0 +1,85 @@
+2026-11-18 14:40:47 +0300
+secret/rustfs-auth created
+pod "input-loader" deleted from de-hw5 namespace
+namespace/de-hw5 unchanged
+persistentvolumeclaim/input unchanged
+pod/input-loader created
+pod/input-loader condition met
+persistentvolumeclaim/rustfs-disk0 created
+persistentvolumeclaim/rustfs-disk1 created
+persistentvolumeclaim/rustfs-disk2 created
+persistentvolumeclaim/rustfs-disk3 created
+deployment.apps/rustfs created
+service/rustfs created
+Waiting for deployment "rustfs" rollout to finish: 0 of 1 updated replicas are available...
+deployment "rustfs" successfully rolled out
+NAME                          READY   STATUS      RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+pod/input-loader              1/1     Running     0          8s    10.244.0.10   de-hw5-control-plane   <none>           <none>
+pod/pairs-oom-nl6b4           0/1     OOMKilled   0          48s   10.244.0.7    de-hw5-control-plane   <none>           <none>
+pod/pairs-profile-tjzl4       0/1     Completed   0          45s   10.244.0.8    de-hw5-control-plane   <none>           <none>
+pod/pairs-tuned-rrhf9         0/1     Completed   0          42s   10.244.0.9    de-hw5-control-plane   <none>           <none>
+pod/rustfs-6ccf5f4944-58ccs   1/1     Running     0          7s    10.244.0.15   de-hw5-control-plane   <none>           <none>
+
+NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+service/rustfs   ClusterIP   10.96.134.224   <none>        9000/TCP   7s    app=rustfs-hw5
+
+NAME                                 STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE   VOLUMEMODE
+persistentvolumeclaim/input          Bound    pvc-ae51a0fa-6d59-4960-b425-2c8542052cfb   256Mi      RWO            standard       <unset>                 55s   Filesystem
+persistentvolumeclaim/rustfs-disk0   Bound    pvc-7f50704f-8e0f-4d48-b687-73eec31cb037   256Mi      RWO            standard       <unset>                 7s    Filesystem
+persistentvolumeclaim/rustfs-disk1   Bound    pvc-2ef7bed3-bc82-431b-ab6f-5133962aa7ab   256Mi      RWO            standard       <unset>                 7s    Filesystem
+persistentvolumeclaim/rustfs-disk2   Bound    pvc-66e7360e-8a28-48aa-ad73-5122dcd0a922   256Mi      RWO            standard       <unset>                 7s    Filesystem
+persistentvolumeclaim/rustfs-disk3   Bound    pvc-7761a454-a62f-4bc6-b987-3571fdf531ca   256Mi      RWO            standard       <unset>                 7s    Filesystem
+s3://hh-lake/clean/vacancies.jsonl 100922060 bytes
+job.batch/pairs-map created
+job.batch/pairs-map condition met
+parallelism=4 completions=8 completedIndexes=0-7
+NAME                READY   STATUS      RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+pairs-map-0-qnj92   0/1     Completed   0          6s    10.244.0.16   de-hw5-control-plane   <none>           <none>
+pairs-map-1-h7p7b   0/1     Completed   0          6s    10.244.0.18   de-hw5-control-plane   <none>           <none>
+pairs-map-2-8lwh9   0/1     Completed   0          6s    10.244.0.17   de-hw5-control-plane   <none>           <none>
+pairs-map-3-kjhmp   0/1     Completed   0          6s    10.244.0.19   de-hw5-control-plane   <none>           <none>
+pairs-map-4-2pfg9   0/1     Completed   0          3s    10.244.0.20   de-hw5-control-plane   <none>           <none>
+pairs-map-5-l9dk8   0/1     Completed   0          3s    10.244.0.21   de-hw5-control-plane   <none>           <none>
+pairs-map-6-c4nw2   0/1     Completed   0          3s    10.244.0.22   de-hw5-control-plane   <none>           <none>
+pairs-map-7-6z94z   0/1     Completed   0          3s    10.244.0.23   de-hw5-control-plane   <none>           <none>
+[pod/pairs-map-6-c4nw2/pairs] 2026-11-18T11:41:30.705959137Z index=6 range=[75691545,88306802) rows=28223 selected=3433 distinct=15088
+[pod/pairs-map-6-c4nw2/pairs] 2026-11-18T11:41:30.705990178Z memory_peak_bytes=60907520
+[pod/pairs-map-7-6z94z/pairs] 2026-11-18T11:41:30.729327845Z index=7 range=[88306802,100922060) rows=27979 selected=3361 distinct=18264
+[pod/pairs-map-7-6z94z/pairs] 2026-11-18T11:41:30.730297720Z memory_peak_bytes=60936192
+[pod/pairs-map-0-qnj92/pairs] 2026-11-18T11:41:27.796104718Z index=0 range=[0,12615257) rows=28825 selected=2763 distinct=12022
+[pod/pairs-map-0-qnj92/pairs] 2026-11-18T11:41:27.796203510Z memory_peak_bytes=67043328
+[pod/pairs-map-1-h7p7b/pairs] 2026-11-18T11:41:27.794928010Z index=1 range=[12615257,25230515) rows=28486 selected=2854 distinct=11428
+[pod/pairs-map-1-h7p7b/pairs] 2026-11-18T11:41:27.794934885Z memory_peak_bytes=62144512
+[pod/pairs-map-2-8lwh9/pairs] 2026-11-18T11:41:27.794851135Z index=2 range=[25230515,37845772) rows=28794 selected=2734 distinct=11327
+[pod/pairs-map-2-8lwh9/pairs] 2026-11-18T11:41:27.794915552Z memory_peak_bytes=63442944
+[pod/pairs-map-3-kjhmp/pairs] 2026-11-18T11:41:27.794997718Z index=3 range=[37845772,50461030) rows=29534 selected=2384 distinct=11438
+[pod/pairs-map-3-kjhmp/pairs] 2026-11-18T11:41:27.795014260Z memory_peak_bytes=62128128
+[pod/pairs-map-4-2pfg9/pairs] 2026-11-18T11:41:30.707249970Z index=4 range=[50461030,63076287) rows=29820 selected=2521 distinct=14161
+[pod/pairs-map-4-2pfg9/pairs] 2026-11-18T11:41:30.707261803Z memory_peak_bytes=60997632
+[pod/pairs-map-5-l9dk8/pairs] 2026-11-18T11:41:30.723636553Z index=5 range=[63076287,75691545) rows=27727 selected=3577 distinct=15909
+[pod/pairs-map-5-l9dk8/pairs] 2026-11-18T11:41:30.723716053Z memory_peak_bytes=60940288
+job.batch/pairs-reduce created
+job.batch/pairs-reduce condition met
+parts=8 rows=229388 selected=23627 distinct=48616 occurrences=353186
+result=s3://hh-lake/hw5/20261118T114047Z/pairs.csv
+memory_peak_bytes=73404416
+top10=10/10 MATCH; all_pairs=48616/48616 MATCH
+ 1. 1с программирование | 1с: предприятие 8 — 4465
+ 2. 1с программирование | 1с: бухгалтерия — 2824
+ 3. 1с программирование | обновление конфигурации 1с — 2430
+ 4. 1с программирование | 1с: управление торговлей — 2408
+ 5. 1с программирование | erp-системы на базе 1с — 2061
+ 6. 1с: бухгалтерия | 1с: предприятие 8 — 1986
+ 7. 1с программирование | 1с: документооборот — 1882
+ 8. 1с программирование | 1с: зарплата и управление персоналом — 1805
+ 9. 1с: предприятие 8 | 1с: управление торговлей — 1604
+10. 1с программирование | создание конфигурации 1с — 1527
+NAME                STARTED                FINISHED
+pairs-map-0-qnj92   2026-11-18T11:41:27Z   2026-11-18T11:41:27Z
+pairs-map-1-h7p7b   2026-11-18T11:41:27Z   2026-11-18T11:41:27Z
+pairs-map-2-8lwh9   2026-11-18T11:41:27Z   2026-11-18T11:41:27Z
+pairs-map-3-kjhmp   2026-11-18T11:41:27Z   2026-11-18T11:41:27Z
+pairs-map-4-2pfg9   2026-11-18T11:41:30Z   2026-11-18T11:41:30Z
+pairs-map-5-l9dk8   2026-11-18T11:41:30Z   2026-11-18T11:41:30Z
+pairs-map-6-c4nw2   2026-11-18T11:41:30Z   2026-11-18T11:41:30Z
+pairs-map-7-6z94z   2026-11-18T11:41:30Z   2026-11-18T11:41:30Z
